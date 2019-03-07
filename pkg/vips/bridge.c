@@ -41,6 +41,13 @@ int remove_icc_profile(VipsImage *in) {
   return vips_image_remove(in, VIPS_META_ICC_NAME);
 }
 
+int remove_image_metadata(VipsImage *img,  char *name) {
+  if (vips_image_remove(img, (const char*) name)) {
+      return 1;
+  }
+  return 0;
+}
+
 int load_jpeg_buffer(void *buf, size_t len, VipsImage **out, int shrink) {
   if (shrink > 0) {
     return vips_jpegload_buffer(buf, len, out, "shrink", shrink, NULL);

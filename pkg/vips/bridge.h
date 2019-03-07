@@ -52,6 +52,7 @@ int to_colorspace(VipsImage *in, VipsImage **out, VipsInterpretation space);
 int is_colorspace_supported(VipsImage *in);
 unsigned long has_profile_embed(VipsImage *in);
 int remove_icc_profile(VipsImage *in);
+int remove_image_metadata(VipsImage *img, char *name);
 int extract_band(VipsImage *in, VipsImage **out, int band, int num);
 int linear1(VipsImage *in, VipsImage **out, double a, double b);
 
