@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/davidbyttow/govips/pkg/vips"
+	"github.com/leslie-wang/govips/pkg/vips"
 )
 
 var (
@@ -38,6 +38,7 @@ func thumbnail(inputFile string, width, height int) error {
 	if err != nil {
 		return err
 	}
+	defer vips.FreeImage(outImage)
 
 	vips.RemoveImageMetadata(outImage, "jpeg-thumbnail-data")
 	vips.RemoveImageMetadata(outImage, "xmp-data")
