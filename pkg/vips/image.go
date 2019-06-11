@@ -63,6 +63,11 @@ func LoadImage(r io.Reader, opts ...LoadOption) (*ImageRef, error) {
 	return NewImageFromBuffer(buf, opts...)
 }
 
+// FreeImage frees the memory pointer
+func FreeImage(img *C.VipsImage) {
+	C.g_object_unref(C.gpointer(unsafe.Pointer(img)))
+}
+
 // NewImageFromFile loads an image from file and creates a new ImageRef
 func NewImageFromFile(file string, opts ...LoadOption) (*ImageRef, error) {
 	startupIfNeeded()
