@@ -41,6 +41,17 @@ func WithAccessMode(a Access) LoadOption {
 	}
 }
 
+// RemoveImageMetadata wraps vips_image_remove function, find and remove an item of metadata.
+func RemoveImageMetadata(in *C.VipsImage, name string) bool {
+	cName := C.CString(name)
+	defer freeCString(cName)
+
+	if C.remove_image_metadata(in, cName) == 1 {
+		return true
+	}
+	return false
+}
+
 // LoadImage loads an ImageRef from the given reader
 func LoadImage(r io.Reader, opts ...LoadOption) (*ImageRef, error) {
 	startupIfNeeded()
